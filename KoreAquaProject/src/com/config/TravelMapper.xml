@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TravelMapper">
+
+	<select id="totalCount_course" resultType="int"
+		parameterType="hashmap">
+		select count(rimage)from travel_course
+		<where>
+			<if test="course == 'ha'">
+				regioncd = 'HA' and searchtype='코스'
+			</if>
+			<if test="course == 'gu'">
+				regioncd = 'GU' and searchtype='코스'
+			</if>
+			<if test="course == 'nd'">
+				regioncd = 'ND' and searchtype='코스'
+			</if>
+			<if test="course == 'sj'">
+				regioncd = 'SJ' and searchtype='코스'
+			</if>
+			<if test="course == 'ys'">
+				regioncd = 'YS' and searchtype='코스'
+			</if>
+		</where>
+	</select>
+
+	<select id="main" parameterType="string" resultType="TravelDTO">
+		select *
+		from travel_course order by rImage
+	</select>
+
+	<select id="course" resultType="TravelDTO">
+		select * from travel_course where
+		regioncd = UPPER (#{course})
+	</select>
+	
+	<!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="area_main" resultType="AreaDTO">
+		select * from travel_area
+	</select>
+		
+	<select id="totalCount_area" resultType="int"
+		parameterType="hashmap">
+		select count(intro) from travel_area 
+		<where>
+			<if test="check == 'check'">
+			TITLE like '%'||#{TITLE}||'%'
+			</if> 
+		</where>
+	</select>
+	
+	<select id="ATitle" resultType="AreaDTO" parameterType="string"> 
+		select * from travel_area  
+		<where>
+		<if test="check=='check'">
+		TITLE like '%'||#{TITLE}||'%'   
+		</if>  
+		
+		</where>
+	</select>   
+
+	<select id="totalCount_REGIONCD" resultType="int"
+		parameterType="hashmap">
+		select count(REGIONCD) from travel_area where REGIONCD = #{REGIONCD} 
+	</select> 
+
+	<select id="totalCount_TITLE" resultType="int"
+		parameterType="hashmap"> 
+		select count(TITLE) from travel_area where TITLE like '%'||#{TITLE}||'%' 
+	</select> 
+	
+	<select id="ARegion" resultType="AreaDTO" parameterType="string"> 
+		select * from travel_area
+		<where>
+		<if test="REGIONCD=='HA'">
+		REGIONCD='HA'
+		</if> 
+		<if test="REGIONCD=='SJ'">
+		REGIONCD='SJ'
+		</if>
+		<if test="REGIONCD=='ND'">
+		REGIONCD='ND' 
+		</if>
+		<if test="REGIONCD=='YS'">
+		REGIONCD='YS' 
+		</if>
+		<if test="REGIONCD=='GU'"> 
+		REGIONCD='GU'
+		</if>
+		</where>
+	</select>   
+	
+</mapper> 

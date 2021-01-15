@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictionMapper">
+
+	<select id="totalCount" resultType="int" parameterType="hashmap">
+		select count(*)
+		from diction
+		<where>
+			<if test="check == 'check'">
+				hnm like '%'||#{hnm}||'%'
+			</if>
+			<if test="initial=='ga'"> 
+				<![CDATA[ hnm>='가' ]]> and  <![CDATA[hnm<'나']]>
+			</if>
+			<if test="initial=='na'"> 
+				<![CDATA[ hnm>='나' ]]> and  <![CDATA[hnm<'다']]>
+			</if>
+			<if test="initial=='da'"> 
+				<![CDATA[ hnm>='다' ]]> and  <![CDATA[hnm<'라']]>
+			</if>
+			<if test="initial=='ra'"> 
+				<![CDATA[ hnm>='라' ]]> and  <![CDATA[hnm<'마']]>
+			</if>
+			<if test="initial=='ma'"> 
+				<![CDATA[ hnm>='마' ]]> and  <![CDATA[hnm<'바']]>
+			</if>
+			<if test="initial=='ba'"> 
+				<![CDATA[ hnm>='바' ]]> and  <![CDATA[hnm<'사']]>
+			</if>
+			<if test="initial=='sa'"> 
+				<![CDATA[ hnm>='사' ]]> and  <![CDATA[hnm<'아']]>
+			</if>
+			<if test="initial=='aa'"> 
+				<![CDATA[ hnm>='아' ]]> and  <![CDATA[hnm<'자']]>
+			</if>
+			<if test="initial=='ja'"> 
+				<![CDATA[ hnm>='자' ]]> and  <![CDATA[hnm<'차']]>
+			</if>
+			<if test="initial=='cha'"> 
+				<![CDATA[ hnm>='차' ]]> and  <![CDATA[hnm<'카']]>
+			</if>
+			<if test="initial=='ka'"> 
+				<![CDATA[ hnm>='카' ]]> and  <![CDATA[hnm<'타']]>
+			</if>
+			<if test="initial=='ta'"> 
+				<![CDATA[ hnm>='타' ]]> and  <![CDATA[hnm<'파']]>
+			</if>
+			<if test="initial=='pa'"> 
+				<![CDATA[ hnm>='파' ]]> and  <![CDATA[hnm<'하']]>
+			</if>
+			<if test="initial=='ha'"> 
+				<![CDATA[ hnm >= '하' ]]>  
+			</if>
+		</where>
+	</select>
+
+	<select id="searchAll" resultType="DictionDTO">
+		select * from diction order by hnm asc
+	</select>
+
+	<select id="search" resultType="DictionDTO"
+		parameterType="string">
+		select * from diction where hnm like '%'||#{hnm}||'%' order by hnm asc
+	</select>
+
+	<select id="initial" resultType="DictionDTO"
+		parameterType="hashmap"> 
+		select * from diction
+		<where>
+			<if test="initial=='ga'"> 
+				<![CDATA[ hnm>='가' ]]> and  <![CDATA[hnm<'나']]> order by hnm asc
+			</if>
+			<if test="initial=='na'"> 
+				<![CDATA[ hnm>='나' ]]> and  <![CDATA[hnm<'다']]> order by hnm asc
+			</if>
+			<if test="initial=='da'"> 
+				<![CDATA[ hnm>='다' ]]> and  <![CDATA[hnm<'라']]> order by hnm asc
+			</if>
+			<if test="initial=='ra'"> 
+				<![CDATA[ hnm>='라' ]]> and  <![CDATA[hnm<'마']]> order by hnm asc
+			</if>
+			<if test="initial=='ma'"> 
+				<![CDATA[ hnm>='마' ]]> and  <![CDATA[hnm<'바']]> order by hnm asc
+			</if>
+			<if test="initial=='ba'"> 
+				<![CDATA[ hnm>='바' ]]> and  <![CDATA[hnm<'사']]> order by hnm asc
+			</if> 
+			<if test="initial=='sa'"> 
+				<![CDATA[ hnm>='사' ]]> and  <![CDATA[hnm<'아']]> order by hnm asc
+			</if>
+			<if test="initial=='aa'"> 
+				<![CDATA[ hnm>='아' ]]> and  <![CDATA[hnm<'자']]> order by hnm asc
+			</if>
+			<if test="initial=='ja'"> 
+				<![CDATA[ hnm>='자' ]]> and  <![CDATA[hnm<'차']]> order by hnm asc
+			</if>
+			<if test="initial=='cha'"> 
+				<![CDATA[ hnm>='차' ]]> and  <![CDATA[hnm<'카']]> order by hnm asc
+			</if>
+			<if test="initial=='ka'"> 
+				<![CDATA[ hnm>='카' ]]> and  <![CDATA[hnm<'타']]> order by hnm asc
+			</if>
+			<if test="initial=='ta'"> 
+				<![CDATA[ hnm>='타' ]]> and  <![CDATA[hnm<'파']]> order by hnm asc
+			</if>
+			<if test="initial=='pa'"> 
+				<![CDATA[ hnm>='파' ]]> and  <![CDATA[hnm<'하']]> order by hnm asc
+			</if>
+			<if test="initial=='ha'"> 
+				<![CDATA[ hnm >= '하' ]]> order by hnm asc
+			</if>
+		</where>
+	</select>
+ 
+</mapper> 
