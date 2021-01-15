@@ -1,1 +1,1 @@
-# KoreAuqaProject
+# KoreAquaProject
